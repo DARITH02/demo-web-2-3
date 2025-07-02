@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zando - Fashion E-commerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 0 20px;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-menu a:hover {
+            color: #666;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 250px;
+            padding: 8px 12px 8px 40px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-button {
+            background: none;
+            border: none;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 12px;
+        }
+
+        .auth-button:hover {
+            color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .product-card {
+            position: relative;
+        }
+
+        .product-image-container {
+            position: relative;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 320px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .sale-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #ef4444;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .favorite-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .favorite-button:hover {
+            background: #f5f5f5;
+        }
+
+        .product-info {
+            margin-top: 16px;
+        }
+
+        .product-prices {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .sale-price {
+            color: #ef4444;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .original-price {
+            color: #666;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .product-title {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .navigation-arrow {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .arrow-button {
+            background: #e5e5e5;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .arrow-button:hover {
+            background: #d1d1d1;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid #e5e5e5;
+            margin-top: 64px;
+            padding: 48px 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #333;
+        }
+
+        .qr-code {
+            width: 96px;
+            height: 96px;
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .payment-card {
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .visa { background: #1a1f71; }
+        .mastercard { background: #eb001b; }
+        .unionpay { background: #0066cc; }
+        .jcb { background: #006633; }
+        .bank { background: #666; }
+        .cod { background: #7c3aed; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .search-container {
+                display: none;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <nav class="nav-menu">
+                <a href="#">WOMEN</a>
+                <a href="#">MEN</a>
+                <a href="#">BOYS</a>
+                <a href="#">GIRLS</a>
+            </nav>
+            
+            <div class="logo">ZANDO</div>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <input type="search" class="search-input" placeholder="Search">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <button class="icon-button">🔔</button>
+                <button class="icon-button">🤍</button>
+                <button class="icon-button">
+                    🛍️
+                    <span class="cart-badge">0</span>
+                </button>
+                <button class="auth-button">LOGIN</button>
+                <button class="auth-button">REGISTER</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <span class="sale-badge">SALE</span>
+                    <img src="/placeholder.svg?height=320&width=280" alt="Cropped Top" class="product-image">
+                    <button class="favorite-button">🤍</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-prices">
+                        <span class="sale-price">US $3.78</span>
+                        <span class="original-price">US $12.59</span>
+                    </div>
+                    <h3 class="product-title">Cropped Top</h3>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <span class="sale-badge">SALE</span>
+                    <img src="/placeholder.svg?height=320&width=280" alt="Sweet Pink Frilled Open Neck Dress" class="product-image">
+                    <button class="favorite-button">🤍</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-prices">
+                        <span class="sale-price">US $6.78</span>
+                        <span class="original-price">US $22.59</span>
+                    </div>
+                    <h3 class="product-title">Sweet Pink Frilled Open Neck Dress</h3>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <span class="sale-badge">SALE</span>
+                    <img src="/placeholder.svg?height=320&width=280" alt="Mini Pleats Skort" class="product-image">
+                    <button class="favorite-button">🤍</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-prices">
+                        <span class="sale-price">US $8.97</span>
+                        <span class="original-price">US $14.95</span>
+                    </div>
+                    <h3 class="product-title">Mini Pleats Skort</h3>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <span class="sale-badge">SALE</span>
+                    <img src="/placeholder.svg?height=320&width=280" alt="Slim Crop Fitted T-Shirts" class="product-image">
+                    <button class="favorite-button">🤍</button>
+                </div>
+                <div class="product-info">
+                    <div class="product-prices">
+                        <span class="sale-price">US $6.47</span>
+                        <span class="original-price">US $12.95</span>
+                    </div>
+                    <h3 class="product-title">Slim Crop Fitted T-Shirts</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-arrow">
+            <button class="arrow-button">→</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Zando App -->
+            <div class="footer-section">
+                <h3>ZANDO APP</h3>
+                <div class="qr-code">QR Code</div>
+            </div>
+
+            <!-- Loyalty -->
+            <div class="footer-section">
+                <h3>LOYALTY</h3>
+                <ul>
+                    <li><a href="#">Membership & Benefits</a></li>
+                </ul>
+            </div>
+
+            <!-- Follow Us -->
+            <div class="footer-section">
+                <h3>FOLLOW US</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Services -->
+            <div class="footer-section">
+                <h3>CUSTOMER SERVICES</h3>
+                <ul>
+                    <li><a href="#">Online exchange policy</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">FAQs & guides</a></li>
+                    <li><a href="#">Find a store</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Us & Payment -->
+            <div class="footer-section">
+                <h3>CONTACT US</h3>
+                <ul>
+                    <li><a href="mailto:info@zandokh.com">info@zandokh.com</a></li>
+                    <li><a href="tel:+85561999716">(+855) 061 999 716</a></li>
+                    <li><a href="tel:+85561330330">(+855) 061 330 330</a></li>
+                </ul>
+                
+                <h3 style="margin-top: 24px;">WE ACCEPT</h3>
+                <div class="payment-methods">
+                    <div class="payment-card visa">VISA</div>
+                    <div class="payment-card mastercard">MC</div>
+                    <div class="payment-card unionpay">UNI</div>
+                    <div class="payment-card jcb">JCB</div>
+                    <div class="payment-card bank">BANK</div>
+                    <div class="payment-card cod">COD</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
